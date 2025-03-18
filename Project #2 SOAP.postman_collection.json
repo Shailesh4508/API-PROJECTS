@@ -1,0 +1,604 @@
+{
+	"info": {
+		"_postman_id": "f2bcabc6-0e9f-405d-ad26-8e465b2d12fa",
+		"name": "Project #2 SOAP",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19044719",
+		"_collection_link": "https://orange-meteor-958908.postman.co/workspace/My-Workspace~709b92f8-7b55-450c-8b3a-fc9e43191a76/collection/19044719-f2bcabc6-0e9f-405d-ad26-8e465b2d12fa?action=share&source=collection_link&creator=19044719"
+	},
+	"item": [
+		{
+			"name": "TC#1 - Number to Words - Positive",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.equal(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"  pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Content-Type header is present and has value 'text/html'\", function () {\r",
+							"    pm.expect(pm.response.headers.get('Content-Type')).to.exist;\r",
+							"    pm.expect(pm.response.headers.get('Content-Type')).to.equal('text/html');\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response body contains the expected HTML schema elements\", function () {\r",
+							"    const expectedElements = [\"html\", \"head\", \"title\", \"body\", \"center\", \"p\", \"ul\", \"b\", \"a\", \"span\", \"li\", \"br\", \"style\", \"META\"];\r",
+							"    const responseBody = pm.response.text();\r",
+							"\r",
+							"    expectedElements.forEach(function(element) {\r",
+							"        pm.expect(responseBody).to.include(`<${element}`);\r",
+							"    });\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml; charset=utf-8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n  <soap:Body>\r\n    <NumberToWords xmlns=\"http://www.dataaccess.com/webservicesserver/\">\r\n      <ubiNum>235</ubiNum>\r\n    </NumberToWords>\r\n  </soap:Body>\r\n</soap:Envelope>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://www.dataaccess.com/webservicesserver/NumberConversion.wso",
+					"protocol": "https",
+					"host": [
+						"www",
+						"dataaccess",
+						"com"
+					],
+					"path": [
+						"webservicesserver",
+						"NumberConversion.wso"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TC#2 - No Headers - Negative",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.equal(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"  pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Content-Type header is present and has value 'text/html'\", function () {\r",
+							"    pm.expect(pm.response.headers.get('Content-Type')).to.exist;\r",
+							"    pm.expect(pm.response.headers.get('Content-Type')).to.equal('text/html');\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response body contains the expected HTML schema elements\", function () {\r",
+							"    const expectedElements = [\"html\", \"head\", \"title\", \"body\", \"center\", \"p\", \"ul\", \"b\", \"a\", \"span\", \"li\", \"br\", \"style\", \"META\"];\r",
+							"    const responseBody = pm.response.text();\r",
+							"\r",
+							"    expectedElements.forEach(function(element) {\r",
+							"        pm.expect(responseBody).to.include(`<${element}`);\r",
+							"    });\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml; charset=utf-8 ",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n  <soap:Body>\r\n    <NumberToWords xmlns=\"http://www.dataaccess.com/webservicesserver/\">\r\n      <ubiNum>235</ubiNum>\r\n    </NumberToWords>\r\n  </soap:Body>\r\n</soap:Envelope>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://www.dataaccess.com//webservicesserver/NumberConversion.wso",
+					"protocol": "https",
+					"host": [
+						"www",
+						"dataaccess",
+						"com"
+					],
+					"path": [
+						"",
+						"webservicesserver",
+						"NumberConversion.wso"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TC#3 - Negative Number - Negative",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.equal(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"  pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Content-Type header is present and has value 'text/html'\", function () {\r",
+							"    pm.expect(pm.response.headers.get('Content-Type')).to.exist;\r",
+							"    pm.expect(pm.response.headers.get('Content-Type')).to.equal('text/html');\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response body contains the expected HTML schema elements\", function () {\r",
+							"    const expectedElements = [\"html\", \"head\", \"title\", \"body\", \"center\", \"p\", \"ul\", \"b\", \"a\", \"span\", \"li\", \"br\", \"style\", \"META\"];\r",
+							"    const responseBody = pm.response.text();\r",
+							"\r",
+							"    expectedElements.forEach(function(element) {\r",
+							"        pm.expect(responseBody).to.include(`<${element}`);\r",
+							"    });\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml; charset=utf-8 ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n  <soap:Body>\r\n    <NumberToWords xmlns=\"http://www.dataaccess.com/webservicesserver/\">\r\n      <ubiNum>-1</ubiNum>\r\n    </NumberToWords>\r\n  </soap:Body>\r\n</soap:Envelope>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://www.dataaccess.com//webservicesserver/NumberConversion.wso",
+					"protocol": "https",
+					"host": [
+						"www",
+						"dataaccess",
+						"com"
+					],
+					"path": [
+						"",
+						"webservicesserver",
+						"NumberConversion.wso"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TC#4 -String - Negative",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.equal(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"  pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Content-Type header is present and has value 'text/html'\", function () {\r",
+							"    pm.expect(pm.response.headers.get('Content-Type')).to.exist;\r",
+							"    pm.expect(pm.response.headers.get('Content-Type')).to.equal('text/html');\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response body contains the expected HTML schema elements\", function () {\r",
+							"    const expectedElements = [\"html\", \"head\", \"title\", \"body\", \"center\", \"p\", \"ul\", \"b\", \"a\", \"span\", \"li\", \"br\", \"style\", \"META\"];\r",
+							"    const responseBody = pm.response.text();\r",
+							"\r",
+							"    expectedElements.forEach(function(element) {\r",
+							"        pm.expect(responseBody).to.include(`<${element}`);\r",
+							"    });\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml; charset=utf-8 ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n  <soap:Body>\r\n    <NumberToWords xmlns=\"http://www.dataaccess.com/webservicesserver/\">\r\n      <ubiNum>shailesh</ubiNum>\r\n    </NumberToWords>\r\n  </soap:Body>\r\n</soap:Envelope>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://www.dataaccess.com//webservicesserver/NumberConversion.wso",
+					"protocol": "https",
+					"host": [
+						"www",
+						"dataaccess",
+						"com"
+					],
+					"path": [
+						"",
+						"webservicesserver",
+						"NumberConversion.wso"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TC#5 -Misc - Negative",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.equal(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"  pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Content-Type header is present and has value 'text/html'\", function () {\r",
+							"    pm.expect(pm.response.headers.get('Content-Type')).to.exist;\r",
+							"    pm.expect(pm.response.headers.get('Content-Type')).to.equal('text/html');\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response body contains the expected HTML schema elements\", function () {\r",
+							"    const expectedElements = [\"html\", \"head\", \"title\", \"body\", \"center\", \"p\", \"ul\", \"b\", \"a\", \"span\", \"li\", \"br\", \"style\", \"META\"];\r",
+							"    const responseBody = pm.response.text();\r",
+							"\r",
+							"    expectedElements.forEach(function(element) {\r",
+							"        pm.expect(responseBody).to.include(`<${element}`);\r",
+							"    });\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml; charset=utf-8 ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n  <soap:Body>\r\n    <NumberToWords xmlns=\"http://www.dataaccess.com/webservicesserver/\">\r\n      <ubiNum>235.23</ubiNum>\r\n    </NumberToWords>\r\n  </soap:Body>\r\n</soap:Envelope>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://www.dataaccess.com//webservicesserver/NumberConversion.wso",
+					"protocol": "https",
+					"host": [
+						"www",
+						"dataaccess",
+						"com"
+					],
+					"path": [
+						"",
+						"webservicesserver",
+						"NumberConversion.wso"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TC#6 -AlphaNumeric - Negative",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.equal(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"  pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Content-Type header is present and has value 'text/html'\", function () {\r",
+							"    pm.expect(pm.response.headers.get('Content-Type')).to.exist;\r",
+							"    pm.expect(pm.response.headers.get('Content-Type')).to.equal('text/html');\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response body contains the expected HTML schema elements\", function () {\r",
+							"    const expectedElements = [\"html\", \"head\", \"title\", \"body\", \"center\", \"p\", \"ul\", \"b\", \"a\", \"span\", \"li\", \"br\", \"style\", \"META\"];\r",
+							"    const responseBody = pm.response.text();\r",
+							"\r",
+							"    expectedElements.forEach(function(element) {\r",
+							"        pm.expect(responseBody).to.include(`<${element}`);\r",
+							"    });\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml; charset=utf-8 ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n  <soap:Body>\r\n    <NumberToWords xmlns=\"http://www.dataaccess.com/webservicesserver/\">\r\n      <ubiNum>Shailesh4508singh</ubiNum>\r\n    </NumberToWords>\r\n  </soap:Body>\r\n</soap:Envelope>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://www.dataaccess.com//webservicesserver/NumberConversion.wso",
+					"protocol": "https",
+					"host": [
+						"www",
+						"dataaccess",
+						"com"
+					],
+					"path": [
+						"",
+						"webservicesserver",
+						"NumberConversion.wso"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TC#7 -Numeric - Positive",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.equal(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"  pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Content-Type header is present and has value 'text/html'\", function () {\r",
+							"    pm.expect(pm.response.headers.get('Content-Type')).to.exist;\r",
+							"    pm.expect(pm.response.headers.get('Content-Type')).to.equal('text/html');\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response body contains the expected HTML schema elements\", function () {\r",
+							"    const expectedElements = [\"html\", \"head\", \"title\", \"body\", \"center\", \"p\", \"ul\", \"b\", \"a\", \"span\", \"li\", \"br\", \"style\", \"META\"];\r",
+							"    const responseBody = pm.response.text();\r",
+							"\r",
+							"    expectedElements.forEach(function(element) {\r",
+							"        pm.expect(responseBody).to.include(`<${element}`);\r",
+							"    });\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml; charset=utf-8 ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n  <soap:Body>\r\n    <NumberToWords xmlns=\"http://www.dataaccess.com/webservicesserver/\">\r\n      <ubiNum>0</ubiNum>\r\n    </NumberToWords>\r\n  </soap:Body>\r\n</soap:Envelope>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://www.dataaccess.com//webservicesserver/NumberConversion.wso",
+					"protocol": "https",
+					"host": [
+						"www",
+						"dataaccess",
+						"com"
+					],
+					"path": [
+						"",
+						"webservicesserver",
+						"NumberConversion.wso"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TC#8 -Special Characters - Negative",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.equal(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"  pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Content-Type header is present and has value 'text/html'\", function () {\r",
+							"    pm.expect(pm.response.headers.get('Content-Type')).to.exist;\r",
+							"    pm.expect(pm.response.headers.get('Content-Type')).to.equal('text/html');\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response body contains the expected HTML schema elements\", function () {\r",
+							"    const expectedElements = [\"html\", \"head\", \"title\", \"body\", \"center\", \"p\", \"ul\", \"b\", \"a\", \"span\", \"li\", \"br\", \"style\", \"META\"];\r",
+							"    const responseBody = pm.response.text();\r",
+							"\r",
+							"    expectedElements.forEach(function(element) {\r",
+							"        pm.expect(responseBody).to.include(`<${element}`);\r",
+							"    });\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml; charset=utf-8 ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n  <soap:Body>\r\n    <NumberToWords xmlns=\"http://www.dataaccess.com/webservicesserver/\">\r\n      <ubiNum>@#$%&&)%></%</ubiNum>\r\n    </NumberToWords>\r\n  </soap:Body>\r\n</soap:Envelope>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://www.dataaccess.com//webservicesserver/NumberConversion.wso",
+					"protocol": "https",
+					"host": [
+						"www",
+						"dataaccess",
+						"com"
+					],
+					"path": [
+						"",
+						"webservicesserver",
+						"NumberConversion.wso"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
