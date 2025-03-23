@@ -1,0 +1,19 @@
+{
+	"info": {
+		"_postman_id": "41a5a7d0-73b0-4db0-a3c7-ae43591c06ca",
+		"name": "Basic GET Req",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19044719",
+		"_collection_link": "https://orange-meteor-958908.postman.co/workspace/My-Workspace~709b92f8-7b55-450c-8b3a-fc9e43191a76/collection/19044719-41a5a7d0-73b0-4db0-a3c7-ae43591c06ca?action=share&source=collection_link&creator=19044719"
+	},
+	"item": [
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}

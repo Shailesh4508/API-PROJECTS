@@ -11,7 +11,108 @@
 			"name": "CreateBooking_Test_Cases",
 			"item": [
 				{
+					"name": "Create Token Request",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Set the token to env\",function(){\r",
+									"    var token = pm.response.json()[\"token\"]\r",
+									"    pm.environment.set(\"token\",token)\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\" : \"admin\",\r\n    \"password\" : \"password123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://restful-booker.herokuapp.com/auth",
+							"protocol": "https",
+							"host": [
+								"restful-booker",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"auth"
+							]
+						},
+						"description": "Generated from cURL: curl -X POST \\\r\n  https://restful-booker.herokuapp.com/auth \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n    \"username\" : \"admin\",\r\n    \"password\" : \"password123\"\r\n}'"
+					},
+					"response": []
+				},
+				{
 					"name": "✅Booking - CreateBooking - TC by AI # 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {\r",
+									"    pm.expect(pm.response.code).to.equal(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Validate the booking object schema\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"    \r",
+									"    pm.expect(responseData).to.be.an('object');\r",
+									"    pm.expect(responseData).to.have.property('booking');\r",
+									"    \r",
+									"    const bookingData = responseData.booking;\r",
+									"    pm.expect(bookingData).to.be.an('object');\r",
+									"    pm.expect(bookingData).to.have.property('firstname');\r",
+									"    pm.expect(bookingData).to.have.property('lastname');\r",
+									"    pm.expect(bookingData).to.have.property('totalprice');\r",
+									"    pm.expect(bookingData).to.have.property('depositpaid');\r",
+									"    pm.expect(bookingData).to.have.property('bookingdates');\r",
+									"    pm.expect(bookingData).to.have.property('additionalneeds');\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Checkin date is in a valid date format\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"    \r",
+									"    pm.expect(responseData.booking.bookingdates.checkin).to.match(/^\\d{4}-\\d{2}-\\d{2}$/);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Checkout date is in a valid date format\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"    \r",
+									"    pm.expect(responseData.booking.bookingdates.checkout).to.match(/^\\d{4}-\\d{2}-\\d{2}$/);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [
@@ -30,15 +131,9 @@
 							}
 						},
 						"url": {
-							"raw": "https://restful-booker.herokuapp.com/booking",
-							"protocol": "https",
+							"raw": "{{c_url}}booking",
 							"host": [
-								"restful-booker",
-								"herokuapp",
-								"com"
-							],
-							"path": [
-								"booking"
+								"{{c_url}}booking"
 							]
 						},
 						"description": "Generated from cURL: curl -X POST \\\r\n  https://restful-booker.herokuapp.com/booking \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n    \"firstname\" : \"Jim\",\r\n    \"lastname\" : \"Brown\",\r\n    \"totalprice\" : 111,\r\n    \"depositpaid\" : true,\r\n    \"bookingdates\" : {\r\n        \"checkin\" : \"2018-01-01\",\r\n        \"checkout\" : \"2019-01-01\"\r\n    },\r\n    \"additionalneeds\" : \"Breakfast\"\r\n}'"
@@ -47,6 +142,56 @@
 				},
 				{
 					"name": "✅Booking - CreateBooking - TC by Snippets # 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"string_you_want_to_search\");\r",
+									"});\r",
+									"pm.test(\"Your test name\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.value).to.eql(100);\r",
+									"});\r",
+									"pm.test(\"Body is correct\", function () {\r",
+									"    pm.response.to.have.body(\"response_body_string\");\r",
+									"});\r",
+									"pm.test(\"Content-Type is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"pm.test(\"Successful POST request\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+									"});\r",
+									"pm.test(\"Status code name has string\", function () {\r",
+									"    pm.response.to.have.status(\"Created\");\r",
+									"});\r",
+									"var jsonObject = xml2Json(responseBody);\r",
+									"var schema = {\r",
+									"    \"items\": {\r",
+									"        \"type\": \"boolean\"\r",
+									"    }\r",
+									"};\r",
+									"\r",
+									"var data1 = [true, false];\r",
+									"var data2 = [true, 123];\r",
+									"\r",
+									"pm.test('Schema is valid', function () {\r",
+									"    pm.expect(tv4.validate(data1, schema)).to.be.true;\r",
+									"    pm.expect(tv4.validate(data2, schema)).to.be.true;\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [
@@ -82,6 +227,141 @@
 				},
 				{
 					"name": "✅Booking - CreateBooking - TC by JS Code # 3",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// // Comment //\r",
+									"// console.log(\"Hello World\")\r",
+									"// console.log(2+2)\r",
+									"\r",
+									"// var name = \"Shailesh\"  //String\r",
+									"// console.log(name)\r",
+									"\r",
+									"// var age = 29  //Integer\r",
+									"// console.log(age)\r",
+									"// var married = true\r",
+									"// console.log(married)\r",
+									"\r",
+									"// age = age+1\r",
+									"// console.log(age)\r",
+									"\r",
+									"// var object = {   // Object creation //\r",
+									"//     name: \"Singh\",\r",
+									"//     age: 32\r",
+									"// }\r",
+									"// console.log(object.age)\r",
+									"// console.log(object.name)\r",
+									"\r",
+									"// function doSomething(a){  //function creation//\r",
+									"//     console.log(a*4)\r",
+									"// }\r",
+									"\r",
+									"// doSomething(10)\r",
+									"\r",
+									"// function sumofTwo(a,b){  // funtion returning 2 variables//\r",
+									"//     return a+b\r",
+									"// }\r",
+									"\r",
+									"// var result = sumofTwo(4,8)\r",
+									"// console.log(result)\r",
+									"\r",
+									"// var jsObject = {     //Conversion of JSON -> JavaScript Object\r",
+									"//     name: \"Thakur\",\r",
+									"//     age: 25\r",
+									"// }\r",
+									"\r",
+									"// var JSONStr = JSON.stringify(jsObject)\r",
+									"// console.log(JSONStr)\r",
+									"\r",
+									"\r",
+									"// var response = '{\"name\" : \"Shailesh\", \"age\" : 30}'  //Conversion of JavaScript -> JSON Object\r",
+									"// var parseResponseJS = JSON.parse(response)\r",
+									"\r",
+									"// console.log(parseResponseJS[\"name\"])\r",
+									"// console.log(parseResponseJS[\"age\"])\r",
+									"\r",
+									"\r",
+									"// var pm = {  //Basic//\r",
+									"//     test : {\r",
+									"//         a : 10\r",
+									"//         // they have inbult written some of the function that you can use easily, Test, response....\r",
+									"//     }\r",
+									"// };\r",
+									"\r",
+									"// console.log(pm.test.a);\r",
+									"//-----------------------------------------------------------------------------------------------------------------------//\r",
+									"\r",
+									"console.log(\"After Making the Request\")\r",
+									"\r",
+									"console.log(pm.info.requestName);\r",
+									"\r",
+									"console.log(pm.response.text()); \r",
+									"console.log(pm.response.json()); \r",
+									"\r",
+									"\r",
+									"console.log(pm.response.code);\r",
+									"console.log(pm.response.status); // OK\r",
+									"\r",
+									"\r",
+									"console.log(pm.response.headers); // Headers\r",
+									"console.log(pm.response.cookies); // Cookies\r",
+									"\r",
+									"pm.globals.set(\"name\", \"Shailesh\");\r",
+									"pm.environment.set(\"name_e\", \"Singh\")\r",
+									"\r",
+									"\r",
+									"\r",
+									"// Assertion\r",
+									"// An assertion is a statement or declaration that is made confidently and emphatically.\r",
+									"// Expected Result ==  Actual Result \r",
+									"\r",
+									"\r",
+									"pm.test(\"Verify the status Code 200\", function (){\r",
+									"\t\tpm.expect(pm.response.code).to.be.equal(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"// write a testcase to verify the firstNAME == \"Jim\"\r",
+									"\r",
+									"pm.test(\"TC#2 - Verify that the Firstname == Shailesh\",function(){\r",
+									"        // get the response - json, fetch the firstname from the json\r",
+									"        // verify that firstname == \"Shailesh\"\r",
+									"\r",
+									"        var responseJSON = pm.response.json()\r",
+									"        var booking = responseJSON[\"booking\"]\r",
+									"        var firstname = booking[\"firstname\"]\r",
+									"        pm.expect(firstname).to.be.equal(\"Shailesh\")\r",
+									"\r",
+									"\r",
+									"})\r",
+									"\r",
+									"pm.test(\"TC#3 Verify that booking ID is not null\",function(){\r",
+									"\r",
+									"        var responseJSON = pm.response.json()\r",
+									"        var bookingId = responseJSON[\"bookingid\"]\r",
+									"        pm.environment.set(\"bookingId\",bookingId)\r",
+									"        pm.expect(bookingId).to.not.equal(null)\r",
+									"\r",
+									"\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [
@@ -92,7 +372,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"firstname\" : \"Jim\",\r\n    \"lastname\" : \"Brown\",\r\n    \"totalprice\" : 111,\r\n    \"depositpaid\" : true,\r\n    \"bookingdates\" : {\r\n        \"checkin\" : \"2025-01-01\",\r\n        \"checkout\" : \"2025-02-01\"\r\n    },\r\n    \"additionalneeds\" : \"Breakfast\"\r\n}",
+							"raw": "{\r\n    \"firstname\" : \"Shailesh\",\r\n    \"lastname\" : \"{{$randomLastName}}\",\r\n    \"totalprice\" : {{$randomInt}},\r\n    \"depositpaid\" : {{$randomBoolean}},\r\n    \"bookingdates\" : {\r\n        \"checkin\" : \"{{$randomDateRecent}}\",\r\n        \"checkout\" : \"{{$randomDateFuture}}\"\r\n    },\r\n    \"additionalneeds\" : \"{{$randomBsNoun}}\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -100,15 +380,9 @@
 							}
 						},
 						"url": {
-							"raw": "https://restful-booker.herokuapp.com/booking",
-							"protocol": "https",
+							"raw": "{{url}}booking",
 							"host": [
-								"restful-booker",
-								"herokuapp",
-								"com"
-							],
-							"path": [
-								"booking"
+								"{{url}}booking"
 							]
 						},
 						"description": "Generated from cURL: curl -X POST \\\r\n  https://restful-booker.herokuapp.com/booking \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n    \"firstname\" : \"Jim\",\r\n    \"lastname\" : \"Brown\",\r\n    \"totalprice\" : 111,\r\n    \"depositpaid\" : true,\r\n    \"bookingdates\" : {\r\n        \"checkin\" : \"2018-01-01\",\r\n        \"checkout\" : \"2019-01-01\"\r\n    },\r\n    \"additionalneeds\" : \"Breakfast\"\r\n}'"
@@ -309,7 +583,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://restful-booker.herokuapp.com/booking/534",
+					"raw": "https://restful-booker.herokuapp.com/booking/{{bookingId}}",
 					"protocol": "https",
 					"host": [
 						"restful-booker",
@@ -318,7 +592,7 @@
 					],
 					"path": [
 						"booking",
-						"534"
+						"{{bookingId}}"
 					]
 				},
 				"description": "Generated from cURL: curl -i https://restful-booker.herokuapp.com/booking/1"
@@ -373,7 +647,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://restful-booker.herokuapp.com/booking/1",
+					"raw": "https://restful-booker.herokuapp.com/booking/{{bookingId}}",
 					"protocol": "https",
 					"host": [
 						"restful-booker",
@@ -382,7 +656,7 @@
 					],
 					"path": [
 						"booking",
-						"1"
+						"{{bookingId}}"
 					]
 				},
 				"description": "Generated from cURL: curl -X PUT \\\r\n  https://restful-booker.herokuapp.com/booking/1 \\\r\n  -H 'Content-Type: application/json' \\\r\n  -H 'Accept: application/json' \\\r\n  -H 'Cookie: token=abc123' \\\r\n  -d '{\r\n    \"firstname\" : \"James\",\r\n    \"lastname\" : \"Brown\",\r\n    \"totalprice\" : 111,\r\n    \"depositpaid\" : true,\r\n    \"bookingdates\" : {\r\n        \"checkin\" : \"2018-01-01\",\r\n        \"checkout\" : \"2019-01-01\"\r\n    },\r\n    \"additionalneeds\" : \"Breakfast\"\r\n}'"
@@ -452,7 +726,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://restful-booker.herokuapp.com/booking/1",
+					"raw": "https://restful-booker.herokuapp.com/{{bookingId}}",
 					"protocol": "https",
 					"host": [
 						"restful-booker",
@@ -460,8 +734,7 @@
 						"com"
 					],
 					"path": [
-						"booking",
-						"1"
+						"{{bookingId}}"
 					]
 				},
 				"description": "Generated from cURL: curl -X PATCH \\\r\n  https://restful-booker.herokuapp.com/booking/1 \\\r\n  -H 'Content-Type: application/json' \\\r\n  -H 'Accept: application/json' \\\r\n  -H 'Cookie: token=abc123' \\\r\n  -d '{\r\n    \"firstname\" : \"James\",\r\n    \"lastname\" : \"Brown\"\r\n}'"
@@ -527,6 +800,35 @@
 				"description": "Generated from cURL: curl -X DELETE \\\r\n  https://restful-booker.herokuapp.com/booking/1 \\\r\n  -H 'Content-Type: application/json' \\\r\n  -H 'Cookie: token=abc123'"
 			},
 			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "c_url",
+			"value": "https://restful-booker.herokuapp.com/",
+			"type": "string"
 		}
 	]
 }

@@ -216,7 +216,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://www.dataaccess.com//webservicesserver/NumberConversion.wso",
+					"raw": "https://www.dataaccess.com/webservicesserver/NumberConversion.wso",
 					"protocol": "https",
 					"host": [
 						"www",
@@ -224,7 +224,6 @@
 						"com"
 					],
 					"path": [
-						"",
 						"webservicesserver",
 						"NumberConversion.wso"
 					]

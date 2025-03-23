@@ -1,0 +1,94 @@
+{
+	"info": {
+		"_postman_id": "649a8863-5341-422e-b663-0f4a3f06a7ab",
+		"name": "Project #4 - Data Driven Testing",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19044719",
+		"_collection_link": "https://orange-meteor-958908.postman.co/workspace/My-Workspace~709b92f8-7b55-450c-8b3a-fc9e43191a76/collection/19044719-649a8863-5341-422e-b663-0f4a3f06a7ab?action=share&source=collection_link&creator=19044719"
+	},
+	"item": [
+		{
+			"name": "Login to User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.test(\"Your test name\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.id).to.not.equal(null);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"email\" : \"{{Email}}\",\n        \"password\" : \"{{Password}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://reqres.in/api/register/preprod",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"register",
+						"preprod"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "email",
+			"value": "Email",
+			"type": "string"
+		},
+		{
+			"key": "password",
+			"value": "Password",
+			"type": "string"
+		}
+	]
+}

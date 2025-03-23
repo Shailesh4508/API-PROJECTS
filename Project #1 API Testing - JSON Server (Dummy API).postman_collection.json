@@ -3,7 +3,8 @@
 		"_postman_id": "e247f465-c473-4c6e-9736-6a5cced7bb71",
 		"name": "Project #1 API Testing - JSON Server (Dummy API)",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "19044719"
+		"_exporter_id": "19044719",
+		"_collection_link": "https://orange-meteor-958908.postman.co/workspace/My-Workspace~709b92f8-7b55-450c-8b3a-fc9e43191a76/collection/19044719-e247f465-c473-4c6e-9736-6a5cced7bb71?action=share&source=collection_link&creator=19044719"
 	},
 	"item": [
 		{
@@ -15,10 +16,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/posts",
-					"protocol": "http",
+					"raw": "{{c_url}}:3000/posts",
 					"host": [
-						"localhost"
+						"{{c_url}}"
 					],
 					"port": "3000",
 					"path": [
@@ -56,8 +56,17 @@
 				"auth": {
 					"type": "noauth"
 				},
-				"method": "HEAD",
+				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \"id\": \"1\",\r\n        \"title\": \"GajRaj\",\r\n        \"views\": 108\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
 					"raw": "http://localhost:3000/posts",
 					"protocol": "http",
@@ -78,17 +87,27 @@
 				"auth": {
 					"type": "noauth"
 				},
-				"method": "HEAD",
+				"method": "PUT",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \"id\": \"1\",\r\n        \"title\": \"Thakur\",\r\n        \"views\": 99\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "http://localhost:3000/posts",
+					"raw": "http://localhost:3000/posts/3",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"posts"
+						"posts",
+						"3"
 					]
 				}
 			},
@@ -100,17 +119,27 @@
 				"auth": {
 					"type": "noauth"
 				},
-				"method": "HEAD",
+				"method": "PATCH",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \"id\": \"3\",\r\n        \"title\": \"GajRaj\",\r\n        \"views\": 101\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "http://localhost:3000/posts",
+					"raw": "http://localhost:3000/posts/3",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"posts"
+						"posts",
+						"3"
 					]
 				}
 			},
@@ -122,7 +151,30 @@
 				"auth": {
 					"type": "noauth"
 				},
-				"method": "HEAD",
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/posts/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"posts",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "OPTIONS",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "OPTIONS",
 				"header": [],
 				"url": {
 					"raw": "http://localhost:3000/posts",
@@ -139,26 +191,54 @@
 			"response": []
 		},
 		{
-			"name": "OPTIONS",
+			"name": "http://localhost:3000/posts/1",
 			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "HEAD",
+				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/posts",
+					"raw": "http://localhost:3000/posts/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"posts"
+						"posts",
+						"1"
 					]
-				}
+				},
+				"description": "Generated from cURL: curl http://localhost:3000/posts/1\n{\n  \"id\": \"1\",\n  \"title\": \"a title\",\n  \"views\": 100\n}"
 			},
 			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "c_url",
+			"value": "http://localhost",
+			"type": "string"
 		}
 	]
 }
