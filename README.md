@@ -61,6 +61,8 @@ newman run <collection-file>.json -e <environment-file>.json
 
 📌 **For detailed Newman usage, check [Postman’s official docs](https://www.postman.com/product/automated-testing/).**
 
+![image](https://github.com/user-attachments/assets/59954999-fd46-4676-8b5c-ac6d4510c415)
+
 ---
 ## 🎯 Conclusion
 
